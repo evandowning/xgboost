@@ -38,7 +38,7 @@ class DMatrix:
     def __init__(self, data=None, label=None, missing=0.0, weight = None):
         # force into void_p, mac need to pass things in as void_p
         self.handle = ctypes.c_void_p( xglib.XGDMatrixCreate() )
-        if data == None:
+        if data is None:
             return
         if isinstance(data,str):
             xglib.XGDMatrixLoad(self.handle, ctypes.c_char_p(data.encode('utf-8')), 1)             
@@ -52,9 +52,9 @@ class DMatrix:
                 self.__init_from_csr(csr)
             except:
                 raise Exception("can not intialize DMatrix from"+str(type(data)))
-        if label != None:
+        if label is not None:
             self.set_label(label)
-        if weight !=None:
+        if weight is not None:
             self.set_weight(weight)
 
     # convert data from csr matrix
